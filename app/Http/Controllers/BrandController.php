@@ -13,7 +13,7 @@ class BrandController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $brand=brand::all();
+    {  $brand=brand:: ORDERBY('entry_date','DESC')->get();
         return view('brand.index',['bran'=>$brand]);
     }
 
@@ -59,9 +59,10 @@ class BrandController extends Controller
      * @param  \App\Models\brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit(brand $brand)
+    public function edit($id)
     {
-        //
+        $brand=brand::find($id);
+        return view('brand.edit',['bran'=>$brand]);
     }
 
     /**
@@ -71,9 +72,13 @@ class BrandController extends Controller
      * @param  \App\Models\brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, brand $brand)
+    public function update(Request $request,$id)
     {
-        //
+        $brand=brand::find($id);
+        $brand->name=$request->name;
+        $brand->entry_date=$request->date;
+        $brand->save();
+        return redirect('brand');
     }
 
     /**
@@ -82,8 +87,9 @@ class BrandController extends Controller
      * @param  \App\Models\brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(brand $brand)
+    public function destroy($id)
     {
-        //
+        brand::destroy($id);
+        return redirect('brand');
     }
 }

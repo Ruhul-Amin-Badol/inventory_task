@@ -20,3 +20,6 @@ Route::get('/', function () {
 });
 Route::resource('brand/', BrandController::class);
 Route::post('brand/', [BrandController::class,'create']);
+Route::get('/edit/{id}', [BrandController::class,'edit']);
+Route::patch('/edit/{id}', [BrandController::class,'update']);
+Route::get('/brand/{id}', [BrandController::class,'destroy']);

@@ -30,7 +30,8 @@
                                 <td>
                                     <a href="{{ url('edit/' . $item->id) }}" class="btn btn-primary"><i
                                             class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="{{ url('/' . $item->id) }}" class="btn btn-danger"><i
+                                    <a onclick="return confirm('are you want to delete?')"
+                                        href="{{ url('brand/' . $item->id) }}" class="btn btn-danger"><i
                                             class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
@@ -44,7 +45,7 @@
         </div>
     </div>
     <!--insert-brand-Modal -->
-    <form action="" method="POST">
+    <form name="brandfrom" action="" method="POST" onsubmit="return validateForm()">
         @csrf
         <div class="modal fade" id="brandadd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -60,10 +61,11 @@
                             <label for="name" class="form-label"><b>Name</b></label>
                             <input type="name" class="form-control" id="name" placeholder="Enter Brand Name"
                                 name="name">
+                            <p id="req" class="text-danger">name must be required</p>
                         </div>
                         <div class="mb-2">
                             <label for="name" class="form-label"><b>date</b></label>
-                            <input type="date" class="form-control" id="date" name="date">
+                            <input type="datetime-local" class="form-control" id="date" name="date">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -74,4 +76,20 @@
             </div>
         </div>
     </form>
+
+    <script>
+        function validateForm() {
+            let x = document.forms["brandfrom"]["name"].value;
+            if (x == "") {
+                // alert("Name must be filled out");
+                $("#req").show();
+                return false;
+            }
+        }
+
+        $(document).ready(function() {
+            console.log("areh hi");
+            $("#req").hide();
+        });
+    </script>
 @endsection
