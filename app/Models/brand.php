@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Model\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,4 +16,8 @@ class brand extends Model
         'entry_date',
     ];
 
+    public function models()
+    {
+        return $this->belongsTo(models::class);
+    }
 }

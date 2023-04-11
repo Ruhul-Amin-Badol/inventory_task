@@ -25,7 +25,7 @@
                             <a class="nav-link text-white" href="{{url('brand')}}">Brand</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{url('')}}">Model</a>
+                            <a class="nav-link text-white" href="{{url('models')}}">Model</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">Items</a>

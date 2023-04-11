@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ModelsController;
 use App\Models\brand;
+use App\Models\models;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +18,17 @@ use App\Models\brand;
 */
 
 Route::get('/', function () {
-    return view('home');
+
+    $data['brand']=brand::all();
+    $data['models']=models::all();
+    return view('home',$data);
 });
+// brand
 Route::resource('brand/', BrandController::class);
 Route::post('brand/', [BrandController::class,'create']);
 Route::get('/edit/{id}', [BrandController::class,'edit']);
 Route::patch('/edit/{id}', [BrandController::class,'update']);
 Route::get('/brand/{id}', [BrandController::class,'destroy']);
+// models
+Route::resource('models/', ModelsController::class);
+Route::post('models/', [ModelsController::class,'create']);

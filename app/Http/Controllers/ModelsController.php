@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\models;
+use App\Models\brand;
 use Illuminate\Http\Request;
 
 class ModelsController extends Controller
@@ -13,8 +14,10 @@ class ModelsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        $models=models::with('models')->get();
+        $brand=brand::with('brand')->get();
+        return view('modelss.index',['ban'=>$brand],['mod'=>$models]);
     }
 
     /**
@@ -22,9 +25,14 @@ class ModelsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $models = new models;
+        $models->brand_id=$request->brand_id;
+        $models->name=$request->name;
+        $models->entry_date=$request->date;
+        $models->save();
+        return redirect('models');
     }
 
     /**

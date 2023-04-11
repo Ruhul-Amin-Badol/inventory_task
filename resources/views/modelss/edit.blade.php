@@ -8,7 +8,7 @@
                 <div class="col-4">
                     <div class="card p-2 bg-light">
                         <div class="mb-2">
-                            <h4>Edit Brand</h4>
+                            <h4>Edit Model</h4>
                         </div>
                         <div class="mb-2">
                             <label for="name" class="form-label"><b>Name</b></label>
