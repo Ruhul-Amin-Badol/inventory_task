@@ -15,9 +15,9 @@ class ModelsController extends Controller
      */
     public function index()
     {   
-        $models=models::with('models')->get();
-        $brand=brand::with('brand')->get();
-        return view('modelss.index',['ban'=>$brand],['mod'=>$models]);
+        $modelss=models::with('brand')->get();
+        $brandss=brand::with('models')->get();
+        return view('modelss.index',['bran'=>$brandss],['mod'=>$modelss]);
     }
 
     /**
@@ -63,9 +63,11 @@ class ModelsController extends Controller
      * @param  \App\Models\models  $models
      * @return \Illuminate\Http\Response
      */
-    public function edit(models $models)
+    public function edit($id)
     {
-        //
+        $model=models::find($id);
+        $brand=brand::all();
+        return view('modelss.edit',['mode'=>$model],['brand'=>$brand]);
     }
 
     /**
@@ -77,7 +79,8 @@ class ModelsController extends Controller
      */
     public function update(Request $request, models $models)
     {
-        //
+        $models->update($request->all());
+        return redirect('models');
     }
 
     /**
@@ -86,8 +89,9 @@ class ModelsController extends Controller
      * @param  \App\Models\models  $models
      * @return \Illuminate\Http\Response
      */
-    public function destroy(models $models)
+    public function destroy( $models)
     {
-        //
+        models::destroy($models);
+        return redirect('models');
     }
 }

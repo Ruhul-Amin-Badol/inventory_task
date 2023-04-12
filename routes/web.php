@@ -32,3 +32,6 @@ Route::get('/brand/{id}', [BrandController::class,'destroy']);
 // models
 Route::resource('models/', ModelsController::class);
 Route::post('models/', [ModelsController::class,'create']);
+Route::get('modeledit/{id}', [ModelsController::class,'edit']);
+Route::patch('modeledit/{models}', [ModelsController::class,'update']);
+Route::get('modeldelete/{models}', [ModelsController::class,'destroy']);

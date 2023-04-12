@@ -16,10 +16,10 @@ class models extends Model
         'brand_id',
         'name',
         'entry_date',
-    ];
+    ]; 
     public function brand()
     {
-        return $this->hasMany(brand::class,'brand_id','id');
+        return $this->hasOne(brand::class,'id','brand_id');
     }
 
 }

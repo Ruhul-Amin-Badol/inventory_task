@@ -16,27 +16,27 @@
                     <thead>
                         <tr>
                             <th>SN</th>
-                            <th>Name</th>
+                            <th>Model Name</th>
                             <th>Brand Name</th>
                             <th>Entry_Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($bran as $item) --}}
+                        @foreach ($mod as $item)
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$item->name}}</td>
+                            <td>{{$item->brand->name}}</td>
+                            <td>{{$item->entry_date}}</td>
                             <td>
-                                <a href="{{ url('edit/') }}" class="btn btn-primary"><i
+                                <a href="{{ url('modeledit/'.$item->id) }}" class="btn btn-primary"><i
                                         class="fa-solid fa-pen-to-square"></i></a>
-                                <a onclick="return confirm('are you want to delete?')" href="{{ url('brand/') }}"
+                                <a onclick="return confirm('are you want to delete?')" href="{{ url('modeldelete/'.$item->id) }}"
                                     class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                             </td>
                         </tr>
-                        {{-- @endforeach --}}
+                        @endforeach
 
                     </tbody>
                 </table>
@@ -62,7 +62,7 @@
                             <label for="barandname" class="form-label"><b>Brand</b></label>
                             <select class="form-select" name="brand_id" id="brand_id">
                                 <option selected>--Select Brand Name--</option>
-                                @foreach ($mod as $item)
+                                @foreach ($bran as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
