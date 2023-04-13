@@ -8,7 +8,7 @@
                     <h3>All Brand</h3>
                 </div>
                 <div class="p-3">
-                    <button type="submit" class="btn btn-primary btn-block" data-bs-toggle="modal"
+                    <button type="submit" class="btn btn-warning btn-block" data-bs-toggle="modal"
                         data-bs-target="#brandadd">Add Brand <i class="fa-solid fa-plus"></i></button>
                 </div>
 
@@ -28,7 +28,7 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->entry_date }}</td>
                                 <td>
-                                    <a href="{{ url('edit/' . $item->id) }}" class="btn btn-primary"><i
+                                    <a href="{{ url('edit/' . $item->id) }}" class="btn btn-info"><i
                                             class="fa-solid fa-pen-to-square"></i></a>
                                     <a onclick="return confirm('are you want to delete?')"
                                         href="{{ url('brand/' . $item->id) }}" class="btn btn-danger"><i
@@ -58,7 +58,7 @@
                     <div class="modal-body">
 
                         <div class="mb-2">
-                            <label for="name" class="form-label"><b>Name</b></label>
+                            <label for="name" class="form-label"><b>Name <span class="text-danger">*</span> </b></label>
                             <input type="name" class="form-control" id="name" placeholder="Enter Brand Name"
                                 name="name">
                             <p id="req" class="text-danger">name must be required</p>
@@ -81,14 +81,12 @@
         function validateForm() {
             let x = document.forms["brandfrom"]["name"].value;
             if (x == "") {
-                // alert("Name must be filled out");
                 $("#req").show();
                 return false;
             }
         }
 
         $(document).ready(function() {
-            console.log("areh hi");
             $("#req").hide();
         });
     </script>

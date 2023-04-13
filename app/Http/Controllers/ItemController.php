@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\item;
+use App\Models\models;
+use App\Models\brand;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -14,17 +16,27 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $data['models']=models::all();
+        $data['brands']=brand::all();
+        $data['items']=item::with('branditem')->with('brandmodel')->get();
+        
+        return view('item.index',$data);
     }
-
+    // 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $item = new item;
+        $item->brand_id=$request->brand_id;
+        $item->model_id=$request->model_id;
+        $item->name=$request->name;
+        $item->entry_date=$request->date;
+        $item->save();
+        return redirect('items'); 
     }
 
     /**
@@ -56,8 +68,11 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(item $item)
-    {
-        //
+    {   
+        $data['models']=models::all();
+        $data['brands']=brand::all();
+        $data['item']=$item;
+        return view('item.edit',$data);
     }
 
     /**
@@ -69,7 +84,8 @@ class ItemController extends Controller
      */
     public function update(Request $request, item $item)
     {
-        //
+        $item->update($request->all());
+        return redirect()->route('items.index');
     }
 
     /**
@@ -80,6 +96,7 @@ class ItemController extends Controller
      */
     public function destroy(item $item)
     {
-        //
+        $item->delete();
+        return redirect()->route('items.index');
     }
 }

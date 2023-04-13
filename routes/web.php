@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ModelsController;
+use App\Http\Controllers\ItemController;
 use App\Models\brand;
 use App\Models\models;
+use App\Models\item;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,7 @@ Route::get('/', function () {
 
     $data['brand']=brand::all();
     $data['models']=models::all();
+    $data['item']=item::all();
     return view('home',$data);
 });
 // brand
@@ -35,3 +38,9 @@ Route::post('models/', [ModelsController::class,'create']);
 Route::get('modeledit/{id}', [ModelsController::class,'edit']);
 Route::patch('modeledit/{models}', [ModelsController::class,'update']);
 Route::get('modeldelete/{models}', [ModelsController::class,'destroy']);
+
+// items
+Route::resource('items', ItemController::class);
+Route::post('items/', [ItemController::class,'create']);
+Route::get('itemedit/{item}', [ItemController::class,'edit']);
+Route::get('itemdelete/{item}', [ItemController::class,'destroy'])->name('itemdelete');
